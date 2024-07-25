@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState } from "react";
+import TasksContext from "../context/TasksContext";
 
 const AddTask = () => {
+
+    const { state, dispatch } = useContext(TasksContext)
+
     const [title, setTitle] = useState("");
     const [des, setDes] = useState("");
 

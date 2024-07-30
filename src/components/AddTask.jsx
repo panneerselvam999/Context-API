@@ -67,7 +67,6 @@
 
 // export default AddTask;
 
-
 import React, { useContext, useState } from "react";
 import { TasksContext } from "../context/TasksContext";
 
@@ -87,7 +86,8 @@ const AddTask = () => {
 
     return (
         <div className="bg-background mt-24 flex flex-col items-center justify-center">
-            <p className="text-center">{`Currently ${state.tasksList.length} Task(s) bending`}</p>
+            <h2 className="text-5xl bg-slate-400 px-6 py-2 mb-5 rounded-md">Context API</h2>
+            <p className="mb-5 rounded-md bg-slate-800 px-6 py-2 text-center text-2xl text-white">{`Currently ${state.tasksList.length} Task(s) bending`}</p>
             <form className="mx-auto w-3/4 rounded-md bg-slate-400 p-6 shadow-lg">
                 <div className="space-y-4">
                     <div>

@@ -1,35 +1,34 @@
-import React, { useReducer } from "react";
-import { createContext } from "react";
+import React, { useReducer, createContext } from "react";
 
-export const tasksContext = createContext();
+export const TasksContext = createContext();
 
 const tasksReducer = (state, action) => {
   switch (action.type) {
     case "ADD_TASK":
       const id = Math.random() * 1000;
-      let task = { ...action.payload, id };
+      const task = { ...action.payload, id };
       return { ...state, tasksList: [...state.tasksList, task] };
 
     case "REMOVE_TASK":
-      let list = state.tasksList.filter(
-        (task) => task.id !== action.payload.id,
+      const filteredList = state.tasksList.filter(
+        (task) => task.id !== action.payload.id
       );
-      return { ...state, tasksList: list };
+      return { ...state, tasksList: filteredList };
 
     case "UPDATE_TASK":
-      let updateList = state.tasksList.map((task) =>
-        task.id === action.payload.id ? action.payload : task,
+      const updatedList = state.tasksList.map((task) =>
+        task.id === action.payload.id ? action.payload : task
       );
-      return { ...state, tasksList: [...updateList] };
+      return { ...state, tasksList: updatedList };
 
     case "GET_TASK":
-      return state.tasksList;
+      return { ...state };
 
     case "SET_SELECT_TASK":
-      return { ...state, selectTask: action.payload };
+      return { ...state, selectTask: { ...action.payload } };
 
     case "GET_SELECT_TASK":
-      return state.selectTask;
+      return { ...state };
 
     default:
       return state;
@@ -41,14 +40,14 @@ const initialState = {
   selectTask: {},
 };
 
-const TasksContext = ({ children }) => {
+const TasksProvider = ({ children }) => {
   const [state, dispatch] = useReducer(tasksReducer, initialState);
 
   return (
-    <tasksContext.Provider value={{ state, dispatch }}>
+    <TasksContext.Provider value={{ state, dispatch }}>
       {children}
-    </tasksContext.Provider>
+    </TasksContext.Provider>
   );
 };
 
-export default TasksContext;
+export default TasksProvider;
